@@ -4,6 +4,7 @@
   "description": "training-react-redux-ts",
   "main": "app.js",
   "scripts": {
+    "start": "node expressConfiguration.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -17,9 +18,18 @@
   },
   "homepage": "https://github.com/podniesm/training-react-redux-ts#readme",
   "dependencies": {
-    "express": "^4.14.0"
+    "express": "^4.14.0",
+    "react": "^15.4.1",
+    "react-dom": "^15.4.1",
+    "react-router": "^3.0.0"
   },
   "devDependencies": {
-    "gulp": "^3.9.1"
+    "gulp": "^3.9.1",
+    "source-map-loader": "^0.1.5",
+    "ts-loader": "^1.2.2",
+    "typescript": "^2.0.10",
+    "typings": "^2.0.0",
+    "webpack": "^1.13.3",
+    "webpack-stream": "^3.2.0"
   }
 }

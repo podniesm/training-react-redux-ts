@@ -1,0 +1,21 @@
+﻿{
+  "compilerOptions": {
+    "noImplicitAny": false,
+    "target": "es3",
+    "module": "commonjs",
+    "jsx": "react",
+    "isolatedModules": false,
+    "moduleResolution": "node",
+    "declaration": false,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "removeComments": true,
+    "sourceMap": true,
+    "allowJs": true
+  },
+  "include": [
+    "src/**/*",
+    "test/**/*",
+    "typings/index.d.ts"
+  ]
+}

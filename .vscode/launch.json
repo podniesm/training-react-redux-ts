@@ -11,15 +11,35 @@
             "program": "${workspaceRoot}\\expressConfiguration.js",
             "cwd": "${workspaceRoot}",
             "outFiles": [],
-            "sourceMaps": true
+            "sourceMaps": true,
+            "runtimeArgs": [
+                "--nolazy"
+            ],
+            "env": {
+                "NODE_ENV": "development"
+            }
+        },
+        {
+            "type": "node",
+            "request": "attach",
+            "name": "Attach",
+            "port": 5858,
+            "address": "localhost",
+            "restart": false,
+            "outDir": null,
+            "localRoot": "${workspaceRoot}",
+            "outFiles": [],
+            "sourceMaps": true,
+            "remoteRoot": null
         },
         {
             "type": "node",
             "request": "attach",
             "name": "Attach to Process",
             "port": 5858,
-            "outFiles": [],
-            "sourceMaps": true
+            "processId": "${command.PickProcess}",
+            "sourceMaps": true,
+            "outDir": null
         }
     ]
 }

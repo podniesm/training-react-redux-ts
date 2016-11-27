@@ -6,6 +6,10 @@ app.use(express.static(path.join(__dirname, '_wwwroot')));
 app.get('*', (req, res) => {
     res.sendFile(path.resolve(__dirname, '_wwwroot', 'index.html'));
 });
-app.listen(3000, () => {
+app.listen(3000, (err) => {
+    if(err) {
+        console.log(err);
+        return;
+    }
     console.log('react-redux-ts training app listening on port 3000');
 });
