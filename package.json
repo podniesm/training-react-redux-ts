@@ -1,0 +1,25 @@
+{
+  "name": "react-redux-ts",
+  "version": "1.0.0",
+  "description": "training-react-redux-ts",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/podniesm/training-react-redux-ts.git"
+  },
+  "author": "podniesm",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/podniesm/training-react-redux-ts/issues"
+  },
+  "homepage": "https://github.com/podniesm/training-react-redux-ts#readme",
+  "dependencies": {
+    "express": "^4.14.0"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1"
+  }
+}
