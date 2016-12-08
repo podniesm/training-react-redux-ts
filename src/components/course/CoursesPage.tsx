@@ -1,7 +1,12 @@
+import Course from './Course';
 import IProps from '../common/IProps';
 import * as React from 'react';
 
-class CoursesPage extends React.Component<IProps, any> {
+interface ICoursesPageState {
+    course: Course;
+}
+
+class CoursesPage extends React.Component<IProps, ICoursesPageState> {
     constructor(props: IProps, context?: any) {
         super(props, context);
         this.onTitleChange = this.onTitleChange.bind(this);
