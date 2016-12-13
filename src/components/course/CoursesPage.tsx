@@ -1,11 +1,13 @@
 import Course from './Course';
 import IProps from '../common/IProps';
 import * as React from 'react';
+import { connect } from 'react-redux';
 
 interface ICoursesPageState {
     course: Course;
 }
 
+@connect()
 class CoursesPage extends React.Component<IProps, ICoursesPageState> {
     constructor(props: IProps, context?: any) {
         super(props, context);
