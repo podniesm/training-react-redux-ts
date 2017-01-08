@@ -1,5 +1,6 @@
-export interface IEvent {
-    type: string;
+import {IAction} from "~react-redux~redux";
+
+export interface IEvent extends IAction {
 }
 
 export interface IAction<TPayload> extends IEvent {

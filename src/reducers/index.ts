@@ -1,7 +1,8 @@
 import courses from './courseReducer';
 import { combineReducers } from 'redux';
+import IAppState from "../store/IAppState";
 
-const rootReducer = combineReducers({
+const rootReducer = combineReducers<IAppState>({
     courses
 });
 

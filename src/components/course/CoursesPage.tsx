@@ -1,47 +1,37 @@
 import Course from './Course';
 import IProps from '../common/IProps';
-import * as React from 'react';
 import { connect } from 'react-redux';
+import * as React from "react";
+import IAppState from "../../store/IAppState";
+import CourseList from "./CourseList";
 
-interface ICoursesPageState {
-    course: Course;
+interface ICoursesPageStateProps {
+    courses: Course[];
 }
 
-@connect()
-class CoursesPage extends React.Component<IProps, ICoursesPageState> {
-    constructor(props: IProps, context?: any) {
+type ICoursesPageProps = ICoursesPageStateProps & IProps;
+
+@connect(mapStateToProps)
+class CoursesPage extends React.Component<ICoursesPageProps, any> {
+    constructor(props: ICoursesPageProps, context?: any) {
         super(props, context);
-        this.onTitleChange = this.onTitleChange.bind(this);
-        this.onClickSave = this.onClickSave.bind(this);
-        this.state = {
-            course: {
-                title: ''
-            }
-        };
     }
 
     public render(): JSX.Element {
+        const {courses} = this.props;
         return (
             <div>
                 <h1>Courses</h1>
-                <h2>Add Course</h2>
-                <input onChange={this.onTitleChange} value={this.state.course.title} />
-                <input type='submit' value='Save' onClick={this.onClickSave} />
+                <CourseList courses={courses}/>
             </div>
         );
     }
+}
 
-    private onTitleChange(event: any): void {
-        const course = this.state.course;
-        course.title = event.target.value;
-        this.setState({
-            course: course
-        });
-    }
-
-    private onClickSave(): void {
-        alert(`Saving ${this.state.course.title}`);
-    }
+function mapStateToProps(state: IAppState, ownProps: any): ICoursesPageStateProps {
+    return {
+        courses: state.courses
+    };
 }
 
 export default CoursesPage;

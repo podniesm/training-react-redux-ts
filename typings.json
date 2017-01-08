@@ -1,13 +1,16 @@
 {
   "globalDependencies": {
+    "es6-promise": "registry:dt/es6-promise#0.0.0+20160726191732",
     "lodash": "registry:dt/lodash#4.14.0+20161110215204",
     "node": "registry:dt/node#6.0.0+20161110151007",
-    "react": "registry:dt/react#0.14.0+20161124131900",
-    "react-dom": "registry:dt/react-dom#0.14.0+20160412154040",
-    "react-redux": "registry:dt/react-redux#4.4.0+20160908183346",
-    "react-router": "registry:dt/react-router#2.0.0+20161117134353",
-    "react-router/history": "registry:dt/react-router/history#2.0.0+20160830150755",
     "redux": "registry:dt/redux#3.5.2+20160703092728",
     "redux-immutable-state-invariant": "registry:dt/redux-immutable-state-invariant#1.2.0+20160316155526"
+  },
+  "dependencies": {
+    "react": "registry:npm/react#15.0.1+20170104200836",
+    "react-dom": "registry:npm/react-dom#15.0.1+20160826174104",
+    "react-redux": "registry:npm/react-redux#4.4.0+20160614222153",
+    "react-router": "registry:npm/react-router#2.4.0+20160915183637",
+    "redux-thunk": "registry:npm/redux-thunk#2.0.0+20160525185520"
   }
 }
