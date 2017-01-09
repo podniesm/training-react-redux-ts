@@ -7,9 +7,11 @@ import routes from './routes';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import './styles/style.css';
 import {courseActions} from "./actions/courseActions";
+import {authorActions} from "./actions/authorActions";
 
 const store = configureStore();
 store.dispatch(courseActions.loadCourses());
+store.dispatch(authorActions.loadAuthors());
 
 ReactDOM.render(
     <Provider store={store}>

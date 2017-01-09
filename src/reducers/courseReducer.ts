@@ -1,13 +1,10 @@
-import * as _ from 'lodash';
 import { IAction, IEvent } from '../actions/IAction';
 import Course from '../components/course/Course';
 import {courseActionTypes} from "../actions/courseActions";
+import initialState from "./initialState";
 
-export default function courseReducer(state: Course[] = [] , action: IEvent): Course[] {
+export default function courseReducer(state: Course[] = initialState.courses , action: IEvent): Course[] {
     switch(action.type) {
-        case courseActionTypes.CREATE_COURSE:
-            const course = (action as IAction<Course>).payload;
-            return [...state, _.assign({}, course)];
         case courseActionTypes.LOAD_COURSES_SUCCESS:
             return (action as IAction<Course[]>).payload;
         default:

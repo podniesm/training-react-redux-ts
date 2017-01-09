@@ -1,10 +1,10 @@
 import * as React from "react";
-import {FormEvent} from "react";
+import {FormEventHandler} from "react";
 
 interface ITextInputProps {
     name: string;
     label: string;
-    onChange: (event: FormEvent) => void,
+    onChange: FormEventHandler,
     placeholder?: string,
     value: string,
     error?: string

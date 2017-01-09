@@ -1,13 +1,18 @@
 import * as React from "react";
-import {FormEvent} from "react";
+import {FormEventHandler} from "react";
+
+export interface ISelectInputOption {
+    value: string;
+    text: string;
+}
 
 interface ISelectInputProps {
     name: string;
     label: string;
-    onChange: (event: FormEvent) => void,
+    onChange: FormEventHandler,
     defaultOption: string;
     value: string,
-    options: {value: string, text: string}[]
+    options: ISelectInputOption[]
     error?: string
 }
 
