@@ -2,6 +2,7 @@ import { IAction } from './IAction';
 import Course from '../components/course/Course';
 import {IDispatch} from "~redux-thunk~redux";
 import courseApi from '../api/mockCourseApi';
+import {beginAjaxCall, ajaxCallError} from "./ajaxStatusActions";
 
 export const courseActionTypes = {
     LOAD_COURSES_SUCCESS: "LOAD_COURSES_SUCCESS",
@@ -17,6 +18,7 @@ export interface ICourseActions {
 export const courseActions: ICourseActions = {
     loadCourses(): any {
         return function (dispatch: IDispatch): void {
+            dispatch(beginAjaxCall());
             courseApi.getAllCourses().then((courses: Course[]) => {
                 dispatch(loadCoursesSuccess(courses));
             })
@@ -25,12 +27,14 @@ export const courseActions: ICourseActions = {
             })
         }
     },
-    saveCourse(course: Course): any {
-        return function (dispatch: IDispatch) {
+    saveCourse(course: Course): (d: IDispatch) => Promise<Course> {
+        return function (dispatch: IDispatch):Promise<Course> {
+            dispatch(beginAjaxCall());
             return courseApi.saveCourse(course).then((savedCourse: Course) => {
                 course.id ? dispatch(updateCourseSuccess(savedCourse)) : dispatch(createCourseSuccess(savedCourse));
             }).catch((error: Error) => {
-               throw(error);
+                dispatch(ajaxCallError());
+                throw(error);
             });
         }
     }

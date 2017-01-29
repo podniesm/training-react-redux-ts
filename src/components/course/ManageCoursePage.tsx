@@ -24,6 +24,7 @@ interface IManageCoursePageStateProps {
 
 interface IManageCoursePageState {
     course: Course;
+    saving: boolean,
     errors: any;
 }
 
@@ -35,6 +36,7 @@ class ManageCoursePage extends React.Component<IManageCoursePageProps, IManageCo
         super(props, context);
         this.state = {
             course: _.assign({}, props.course),
+            saving: false,
             errors: {}
         };
         this.updateCourse = this.updateCourse.bind(this);
@@ -49,6 +51,7 @@ class ManageCoursePage extends React.Component<IManageCoursePageProps, IManageCo
                             allAuthors = {this.props.authors}
                             onChange={this.updateCourse}
                             onSave={this.saveCourse}
+                            saving={this.state.saving}
                             errors={this.state.errors}/>
             </div>
         );
@@ -58,8 +61,7 @@ class ManageCoursePage extends React.Component<IManageCoursePageProps, IManageCo
         if(this.props.course.id != nextProps.course.id) {
             this.setState({
                 course: _.assign({}, nextProps.course),
-                errors: this.state.errors
-            });
+            } as IManageCoursePageState);
         }
     }
 
@@ -73,7 +75,19 @@ class ManageCoursePage extends React.Component<IManageCoursePageProps, IManageCo
 
     private saveCourse(event: FormEvent): void {
         event.preventDefault();
-        this.props.actions.saveCourse(this.state.course);
+        this.setState({saving: true} as IManageCoursePageState);
+        this.props.actions.saveCourse(this.state.course)
+            .then(() =>  {
+                this.setState({saving: false} as IManageCoursePageState);
+                console.log('Course saved');
+                this.redirectToCourses();
+            }).catch((error: Error) => {
+                console.error(error);
+                this.setState({saving: false} as IManageCoursePageState);
+            });
+    }
+
+    private redirectToCourses(): void {
         this.props.router.push('/courses');
     }
 }

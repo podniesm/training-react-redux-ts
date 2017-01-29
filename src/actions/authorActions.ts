@@ -2,6 +2,7 @@ import {IDispatch} from "~redux-thunk~redux";
 import authorApi from '../api/mockAuthorApi';
 import Author from "../components/course/Author";
 import {IAction} from "./IAction";
+import {beginAjaxCall} from "./ajaxStatusActions";
 
 export const authorActionTypes = {
     LOAD_AUTHORS_SUCCESS: 'LOAD_AUTHORS_SUCCESS'
@@ -14,6 +15,7 @@ export interface IAuthorActions {
 export const authorActions: IAuthorActions = {
     loadAuthors(): any {
         return function(dispatch: IDispatch): void {
+            dispatch(beginAjaxCall());
             authorApi.getAllAuthors().then((authors: Author[]) => {
                 dispatch(loadAuthorsSuccess(authors))
             })

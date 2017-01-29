@@ -10,7 +10,7 @@ interface ICourseFormProps {
     allAuthors: {value: string, text: string}[];
     onSave: MouseEventHandler;
     onChange: FormEventHandler;
-    saving?: boolean;
+    saving: boolean;
     errors: any
 }
 
