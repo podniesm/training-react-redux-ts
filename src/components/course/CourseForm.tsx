@@ -8,7 +8,7 @@ import {FormEventHandler} from "react";
 interface ICourseFormProps {
     course: Course;
     allAuthors: {value: string, text: string}[];
-    onSave?: MouseEventHandler;
+    onSave: MouseEventHandler;
     onChange: FormEventHandler;
     saving?: boolean;
     errors: any

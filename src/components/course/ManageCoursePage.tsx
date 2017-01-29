@@ -10,6 +10,8 @@ import CourseForm from "./CourseForm";
 import {connect} from "react-redux";
 import {ISelectInputOption} from "../common/SelectInput";
 import {FormEvent} from "react";
+import {withRouter} from "react-router";
+import {IRouter} from "react-router";
 
 interface IManageCoursePageActionsProps {
     actions: ICourseActions;
@@ -17,7 +19,7 @@ interface IManageCoursePageActionsProps {
 
 interface IManageCoursePageStateProps {
     course: Course;
-    authors: ISelectInputOption[]
+    authors: ISelectInputOption[];
 }
 
 interface IManageCoursePageState {
@@ -25,17 +27,18 @@ interface IManageCoursePageState {
     errors: any;
 }
 
-type IManageCoursePageProps = IManageCoursePageStateProps & IManageCoursePageActionsProps & IProps;
+type IManageCoursePageProps = IManageCoursePageStateProps & IManageCoursePageActionsProps & IProps & {router: IRouter};
 
 @connect(mapStateToProps, mapDispatchToProps)
 class ManageCoursePage extends React.Component<IManageCoursePageProps, IManageCoursePageState> {
     constructor(props: IManageCoursePageProps, context?: any) {
-        super(props, context)
+        super(props, context);
         this.state = {
             course: _.assign({}, props.course),
             errors: {}
         };
         this.updateCourse = this.updateCourse.bind(this);
+        this.saveCourse = this.saveCourse.bind(this);
     }
 
     public render(): JSX.Element {
@@ -45,9 +48,19 @@ class ManageCoursePage extends React.Component<IManageCoursePageProps, IManageCo
                 <CourseForm course={this.state.course}
                             allAuthors = {this.props.authors}
                             onChange={this.updateCourse}
+                            onSave={this.saveCourse}
                             errors={this.state.errors}/>
             </div>
         );
+    }
+
+    private componentWillReceiveProps(nextProps: IManageCoursePageProps) {
+        if(this.props.course.id != nextProps.course.id) {
+            this.setState({
+                course: _.assign({}, nextProps.course),
+                errors: this.state.errors
+            });
+        }
     }
 
     private updateCourse(event: FormEvent): void {
@@ -57,10 +70,25 @@ class ManageCoursePage extends React.Component<IManageCoursePageProps, IManageCo
         course[field] = target.value;
         return this.setState({course: course} as IManageCoursePageState);
     }
+
+    private saveCourse(event: FormEvent): void {
+        event.preventDefault();
+        this.props.actions.saveCourse(this.state.course);
+        this.props.router.push('/courses');
+    }
+}
+
+function getCourseById(courses: Course[], courseId: string): Course {
+    const course = courses.filter(c => c.id == courseId);
+    return course.length ? course[0] : null;
 }
 
 function mapStateToProps(state: IAppState, ownProps: any): IManageCoursePageStateProps {
+    const courseId = ownProps.params.id;
     let course: Course = {id: '', watchHref: '', title: '', authorId: '', length: '', category: ''};
+    if(courseId && state.courses.length) {
+        course = getCourseById(state.courses, courseId);
+    }
     const authorsFormattedForDropdown: ISelectInputOption[] = state.authors.map(author => {
         return {
             value: author.id,
@@ -78,5 +106,4 @@ function mapDispatchToProps(dispatch: IDispatch, ownProps: any): IManageCoursePa
         actions: bindActionCreators(courseActions as any, dispatch)
     };
 }
-
-export default ManageCoursePage;
+export default withRouter(ManageCoursePage);
